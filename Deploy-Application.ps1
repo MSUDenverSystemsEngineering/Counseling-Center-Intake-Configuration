@@ -200,8 +200,8 @@ Try {
 		try {
 		    $ShellLauncherClass = [wmiclass]"\\$COMPUTER\${NAMESPACE}:WESL_UserSetting"
 		    } catch [Exception] {
-		    write-host $_.Exception.Message;
-		    write-host "Make sure Shell Launcher feature is enabled"
+		    write-output $_.Exception.Message;
+		    write-output "Make sure Shell Launcher feature is enabled"
 		    exit
 		    }
 
@@ -228,8 +228,8 @@ Try {
 		# Define actions to take when the shell program exits.
 
 		$restart_shell = 0
-		$restart_device = 1
-		$shutdown_device = 2
+		# $restart_device = 1
+		# $shutdown_device = 2
 
 		# Examples. You can change these examples to use the program that you want to use as the shell.
 
@@ -260,8 +260,6 @@ Try {
 		# Enable Shell Launcher
 
 		     $ShellLauncherClass.SetEnabled($TRUE)
-
-		     $IsShellLauncherEnabled = $ShellLauncherClass.IsEnabled()
 
 
 		# Remove the new custom shells.
