@@ -149,7 +149,7 @@ Try {
 		Dism /online /Enable-Feature /all /FeatureName:Client-EmbeddedShellLauncher
 
 		# Check if shell launcher license is enabled
-		function Check-ShellLauncherLicenseEnabled
+		function Test-ShellLauncherLicenseEnabled
 		{
 		    [string]$source = @"
 		using System;
@@ -185,7 +185,7 @@ Try {
 
 		[bool]$result = $false
 
-		$result = Check-ShellLauncherLicenseEnabled
+		$result = Test-ShellLauncherLicenseEnabled
 		"`nShell Launcher license enabled is set to " + $result
 		if (-not($result))
 		{
