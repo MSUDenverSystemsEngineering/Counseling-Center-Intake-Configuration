@@ -144,7 +144,7 @@ Try {
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon -Value 1
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultUserName -Value $PlainTextAccount -ErrorAction SilentlyContinue
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value $PlainTextPassword -ErrorAction SilentlyContinue
-		Execute-Process -Path “IE11-Setup-Branding.exe” -Parameters ‘/Q’
+		Execute-Process -Path “IE11-Setup-Branding.exe” -Parameters ‘/q’
 
 		Dism /online /Enable-Feature /all /FeatureName:Client-EmbeddedShellLauncher
 
