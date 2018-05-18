@@ -276,7 +276,7 @@ Try {
 
 		    # "`nEnabled is set to " + $IsShellLauncherEnabled.Enabled
 
-
+Set-RegistryKey -Key "HKEY_LOCAL_MACHINE\SOFTWARE\MSUDenver" -Name "IntakeSet" -Value 'installed' -Type String
 
 		##*===============================================
 		##* POST-INSTALLATION
