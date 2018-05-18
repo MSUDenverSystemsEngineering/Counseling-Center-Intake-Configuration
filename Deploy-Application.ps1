@@ -146,7 +146,7 @@ Try {
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value $PlainTextPassword -ErrorAction SilentlyContinue
 		Execute-Process -Path “IE11-Setup-Branding.exe” -Parameters ‘/q’
 
-		Dism /online /Enable-Feature /all /FeatureName:Client-EmbeddedShellLauncher
+		Dism /online /Enable-Feature /all /FeatureName:Client-EmbeddedShellLauncher /quiet /norestart
 
 		# Check if shell launcher license is enabled
 		function Test-ShellLauncherLicenseEnabled
