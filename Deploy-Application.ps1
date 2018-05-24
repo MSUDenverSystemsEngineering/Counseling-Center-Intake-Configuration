@@ -151,7 +151,6 @@ Try {
 		Set-RegistryKey -Key "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Ext" -Name "IgnoreFrameApprovalCheck" -Value 1 -Type DWORD
 		Set-RegistryKey -Key "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\Ext" -Name "IgnoreFrameApprovalCheck" -Value 1 -Type DWORD
 
-HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\
 		Dism /online /Enable-Feature /all /FeatureName:Client-EmbeddedShellLauncher /quiet /norestart
 
 		# Check if shell launcher license is enabled
