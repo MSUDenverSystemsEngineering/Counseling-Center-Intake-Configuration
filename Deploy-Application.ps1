@@ -146,6 +146,7 @@ Try {
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value $PlainTextPassword -ErrorAction SilentlyContinue
 		Execute-Process -Path “IE11-Setup-Branding.exe” -Parameters ‘/q’
 		Set-RegistryKey -Key "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableTaskMgr" -Value 1 -Type DWORD
+		Set-RegistryKey -Key "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableChangePassword" -Value 1 -Type DWORD
 
 		Dism /online /Enable-Feature /all /FeatureName:Client-EmbeddedShellLauncher /quiet /norestart
 
