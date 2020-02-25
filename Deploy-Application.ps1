@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
 	This script performs the installation or uninstallation of an application(s).
 	# LICENSE #
@@ -38,6 +38,8 @@
 	http://psappdeploytoolkit.com
 #>
 [CmdletBinding()]
+## Suppress PSScriptAnalyzer errors for not using declared variables during AppVeyor build
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseDeclaredVarsMoreThanAssignments", "", Justification="Suppress AppVeyor errors on unused variables below")]
 Param (
 	[Parameter(Mandatory=$false)]
 	[ValidateSet('Install','Uninstall')]
@@ -62,14 +64,14 @@ Try {
 	##*===============================================
 	## Variables: Application
 	[string]$appVendor = 'MSU Denver'
-	[string]$appName = ''
-	[string]$appVersion = ''
-	[string]$appArch = ''
+	[string]$appName = 'Counseling Center Intake Configuration'
+	[string]$appVersion = '1.1.0'
+	[string]$appArch = 'x64'
 	[string]$appLang = 'EN'
 	[string]$appRevision = '01'
-	[string]$appScriptVersion = '1.0.0.0'
-	[string]$appScriptDate = '05/16/2018'
-	[string]$appScriptAuthor = 'Steve Patterson'
+	[string]$appScriptVersion = '3.8.0.0'
+	[string]$appScriptDate = '02/25/2020'
+	[string]$appScriptAuthor = 'Steve Patterson & Jordan Hamilton'
 	##*===============================================
 	## Variables: Install Titles (Only set here to override defaults set by the toolkit)
 	[string]$installName = ''
@@ -83,8 +85,8 @@ Try {
 
 	## Variables: Script
 	[string]$deployAppScriptFriendlyName = 'Deploy Application'
-	[version]$deployAppScriptVersion = [version]'3.7.0'
-	[string]$deployAppScriptDate = '02/13/2018'
+	[version]$deployAppScriptVersion = [version]'3.8.0'
+	[string]$deployAppScriptDate = '23/09/2019'
 	[hashtable]$deployAppScriptParameters = $psBoundParameters
 
 	## Variables: Environment
@@ -144,7 +146,7 @@ Try {
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name AutoAdminLogon -Value 1
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultUserName -Value $PlainTextAccount -ErrorAction SilentlyContinue
 		Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name DefaultPassword -Value $PlainTextPassword -ErrorAction SilentlyContinue
-		Execute-Process -Path “IE11-Setup-Branding.exe” -Parameters ‘/q’
+		Execute-Process -Path 'IE11-Setup-Branding.exe' -Parameters '/q'
 		Set-RegistryKey -Key "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableTaskMgr" -Value 1 -Type DWORD
 		Set-RegistryKey -Key "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Ext" -Name "IgnoreFrameApprovalCheck" -Value 1 -Type DWORD
 		Set-RegistryKey -Key "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\Ext" -Name "IgnoreFrameApprovalCheck" -Value 1 -Type DWORD
@@ -249,7 +251,7 @@ Try {
 
 		# Set Internet Explorer as the shell for "Cashier", and restart the machine if Internet Explorer is closed.
 
-		    $ShellLauncherClass.SetCustomShell($Cashier_SID, "c:\program files\internet explorer\iexplore.exe -k https://ccparticipation.msudenver.edu/Titanium_Web/WCMenu.aspx", ($null), ($null), $restart_shell)
+		    $ShellLauncherClass.SetCustomShell($Cashier_SID, "${$envProgramFilesX86}\Google\Chrome\Application\chrome.exe https://ccparticipation.msudenver.edu/Titanium_Web/WCMenu.aspx https://msudenver.qualtrics.com/jfe/form/SV_4Tw2TgFVk9JrqoR", ($null), ($null), $restart_shell)
 
 		# Set Explorer as the shell for administrators.
 
@@ -279,7 +281,7 @@ Try {
 
 		    # "`nEnabled is set to " + $IsShellLauncherEnabled.Enabled
 
-Set-RegistryKey -Key "HKEY_LOCAL_MACHINE\SOFTWARE\MSUDenver" -Name "IntakeSet" -Value 'installed' -Type String
+		Set-RegistryKey -Key "HKEY_LOCAL_MACHINE\SOFTWARE\MSUDenver" -Name "IntakeSet" -Value '02252020' -Type String
 
 		##*===============================================
 		##* POST-INSTALLATION
